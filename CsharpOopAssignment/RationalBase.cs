@@ -3,12 +3,9 @@ using System;
 namespace CsharpOopAssignment
 {
     public abstract class RationalBase
-    {
-	    
+    {  
         public int Numerator { get; protected set; }
 		public int Denominator { get; protected set; }
-        public int[] Array {get; protected set;}
-	    
 	    /**
          * Constructor for rational values of the type:
          * <p>
@@ -27,10 +24,8 @@ namespace CsharpOopAssignment
             }
             
             Numerator = numerator;
-            Denominator = denominator;
-                
+            Denominator = denominator;        
 	    }
-
         /**
 		 * Specialized constructor to take advantage of shared code between
 		 * Rational and SimplifiedRational
@@ -59,7 +54,6 @@ namespace CsharpOopAssignment
         {
             return Construct(Numerator*(-1), Denominator);
         }
-
         /**
 		 * inversion of rational values
 		 * <p>
@@ -71,15 +65,14 @@ namespace CsharpOopAssignment
 		 */
         public RationalBase Invert()
         {
-	         if(Numerator==0){
+	        if(Numerator==0){
                 throw new InvalidOperationException();
-             }
-             //Negate();
+            }
+           
             int numerator = Denominator;
             int denominator = Numerator;
             return Construct(numerator, denominator);
         }
-
         /**
          * addition of rational values
          * <p>
@@ -95,10 +88,10 @@ namespace CsharpOopAssignment
         {
 	        if(that == null){
                 throw new InvalidOperationException();
-             }
+            }
+
             return this.Construct(((Numerator * that.Denominator) + (that.Numerator * Denominator)), (Denominator * that.Denominator));
         }
-
         /**
          * subtraction of rational values
          * <p>
@@ -118,7 +111,6 @@ namespace CsharpOopAssignment
             
             return Construct(((Numerator* that.Denominator) - (that.Numerator* Denominator)), (Denominator* that.Denominator));
         }
-
         /**
          * multiplication of rational values
          * <p>
@@ -134,12 +126,10 @@ namespace CsharpOopAssignment
         {
 	        if(that == null){
                 throw new InvalidOperationException();
-             }
-            
+            }          
             
             return Construct((Numerator * that.Numerator), (Denominator * that.Denominator));
         }
-
         /**
 		 * division of rational values
 		 * <p>

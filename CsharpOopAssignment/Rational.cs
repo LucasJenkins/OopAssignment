@@ -3,13 +3,10 @@ using System;
 namespace CsharpOopAssignment
 {
     public class Rational : RationalBase
-    {
-        
+    {       
         public Rational(int numerator, int denominator) : base(numerator, denominator) { 
             
-
         }
-
         /**
 		 * Specialized constructor to take advantage of shared code between
 		 * Rational and SimplifiedRational
@@ -35,9 +32,7 @@ namespace CsharpOopAssignment
 
             Rational returnObj = new Rational(numerator, denominator);
             return returnObj;
-
         }
-
         /**
          * @param obj the object to check this against for equality
          * @return true if the given obj is a rational value and its
@@ -50,12 +45,11 @@ namespace CsharpOopAssignment
                 Rational r=(Rational)obj;
                 if(this.Denominator == r.Denominator&& this.Numerator== r.Numerator){
                     return true;
-                }
-                
+                }               
             }
+
             return false;
         }
-
         /**
          * If this is positive, the string should be of the form `numerator/denominator`
          * <p>
@@ -65,9 +59,6 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        /*if(Math.Sign(this.Numerator)==-1 && Math.Sign(this.Denominator)==-1){
-                    return "-numerator/denominator";
-            }*/
             return $"{this.Numerator}/{this.Denominator}";
         }
     }

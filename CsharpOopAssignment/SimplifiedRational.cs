@@ -3,8 +3,7 @@ using System;
 namespace CsharpOopAssignment
 {
     public class SimplifiedRational : RationalBase
-    {
-        
+    {   
         /**
          * Determines the greatest common denominator for the given values
          *
@@ -19,13 +18,14 @@ namespace CsharpOopAssignment
             {
                 throw new InvalidOperationException($"{b} was less than 0");
             }
+
             if (b == 0)
             {
                 return a;
-            }    
-                return Gcd(b, a % b);
+            }
+            
+            return Gcd(b, a % b);
         }
-
         /**
          * Simplifies the numerator and denominator of a rational value.
          * <p>
@@ -41,20 +41,21 @@ namespace CsharpOopAssignment
          */
         public static int[] Simplify(int numerator, int denominator)
         {   
-            int[] simplified = new int[2];
             if(denominator==0){
                 throw new InvalidOperationException("Cannt Divide by 0");
             }
-            if(numerator==0){
+
+            int[] simplified = new int[2];
+            if (numerator==0){
                 simplified[0] = 0;
                 simplified[1] = denominator;
                 return simplified;
             }
+
             simplified[0] = numerator/Gcd(Math.Abs(numerator), Math.Abs(denominator));
             simplified[1] = denominator/Gcd(Math.Abs(numerator), Math.Abs(denominator));
             return simplified;
         }
-
         /**
          * Constructor for rational values of the type:
          * <p>
@@ -73,11 +74,11 @@ namespace CsharpOopAssignment
                 Numerator = 0;
                 Denominator = denominator;
             }
+
             array = Simplify(numerator, denominator);
             Numerator = array[0];
             Denominator = array[1];
         }
-
         /**
 		 * Specialized constructor to take advantage of shared code between
 		 * Rational and SimplifiedRational
@@ -105,7 +106,6 @@ namespace CsharpOopAssignment
             SimplifiedRational returnObj = new SimplifiedRational(array[0], array[1]);
             return returnObj;
         }
-
         /**
          * @param obj the object to check this against for equality
          * @return true if the given obj is a SimplifiedRational value and its
@@ -116,11 +116,12 @@ namespace CsharpOopAssignment
         {
 	        if(obj is SimplifiedRational){
                 SimplifiedRational s = (SimplifiedRational)obj;
-                if(s.Numerator==this.Numerator && s.Denominator==this.Denominator){
+                if (s.Numerator == this.Numerator && s.Denominator == this.Denominator)
+                {
                     return true;
                 }
-
             }
+
             return false;
         }
 
@@ -133,9 +134,6 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        /*if(Math.Sign(this.Numerator)==-1 && Math.Sign(this.Denominator)==-1){
-                    return "-numerator/denominator";
-            }*/
             return $"{this.Numerator}/{this.Denominator}";
         }
     }
