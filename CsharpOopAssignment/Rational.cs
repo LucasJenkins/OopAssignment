@@ -5,7 +5,10 @@ namespace CsharpOopAssignment
     public class Rational : RationalBase
     {
         
-        public Rational(int numerator, int denominator) : base(numerator, denominator) { }
+        public Rational(int numerator, int denominator) : base(numerator, denominator) { 
+            
+
+        }
 
         /**
 		 * Specialized constructor to take advantage of shared code between
@@ -21,10 +24,18 @@ namespace CsharpOopAssignment
 		 * @return the constructed rational value
 		 * @throws ArgumentException
 		 *             if the given denominator is 0
+         *             DONOT CHANGE OBJECT!!!!!RETURN COPY.
 		 */
         public override RationalBase Construct(int numerator, int denominator)
         {
-	        throw new NotImplementedException();
+            if (denominator == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            Rational returnObj = new Rational(numerator, denominator);
+            return returnObj;
+
         }
 
         /**
@@ -35,7 +46,14 @@ namespace CsharpOopAssignment
          */
         public override bool Equals(object obj)
         {
-	        throw new NotImplementedException();
+	        if(obj is Rational){
+                Rational r=(Rational)obj;
+                if(this.Denominator == r.Denominator&& this.Numerator== r.Numerator){
+                    return true;
+                }
+                
+            }
+            return false;
         }
 
         /**
@@ -47,7 +65,10 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        throw new NotImplementedException();
+	        /*if(Math.Sign(this.Numerator)==-1 && Math.Sign(this.Denominator)==-1){
+                    return "-numerator/denominator";
+            }*/
+            return $"{this.Numerator}/{this.Denominator}";
         }
     }
 }

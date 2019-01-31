@@ -15,7 +15,15 @@ namespace CsharpOopAssignment
          */
         public static int Gcd(int a, int b)
         {
-	        throw new NotImplementedException();
+            if (a <= 0 || b < 0)
+            {
+                throw new InvalidOperationException($"{b} was less than 0");
+            }
+            if (b == 0)
+            {
+                return a;
+            }    
+                return Gcd(b, a % b);
         }
 
         /**
@@ -33,7 +41,18 @@ namespace CsharpOopAssignment
          */
         public static int[] Simplify(int numerator, int denominator)
         {   
-	        throw new NotImplementedException();
+            int[] simplified = new int[2];
+            if(denominator==0){
+                throw new InvalidOperationException("Cannt Divide by 0");
+            }
+            if(numerator==0){
+                simplified[0] = 0;
+                simplified[1] = denominator;
+                return simplified;
+            }
+            simplified[0] = numerator/Gcd(Math.Abs(numerator), Math.Abs(denominator));
+            simplified[1] = denominator/Gcd(Math.Abs(numerator), Math.Abs(denominator));
+            return simplified;
         }
 
         /**
@@ -49,7 +68,14 @@ namespace CsharpOopAssignment
          */
         public SimplifiedRational(int numerator, int denominator) : base(numerator, denominator)
         {
-	        throw new NotImplementedException();
+	        int[] array = new int[2];
+            if(numerator==0){
+                Numerator = 0;
+                Denominator = denominator;
+            }
+            array = Simplify(numerator, denominator);
+            Numerator = array[0];
+            Denominator = array[1];
         }
 
         /**
@@ -69,7 +95,15 @@ namespace CsharpOopAssignment
 		 */
         public override RationalBase Construct(int numerator, int denominator)
         {
-	        throw new NotImplementedException();
+            if (denominator == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            int[] array = new int[2];
+            array = Simplify(numerator, denominator);
+            SimplifiedRational returnObj = new SimplifiedRational(array[0], array[1]);
+            return returnObj;
         }
 
         /**
@@ -80,7 +114,14 @@ namespace CsharpOopAssignment
          */
         public override bool Equals(object obj)
         {
-	        throw new NotImplementedException();
+	        if(obj is SimplifiedRational){
+                SimplifiedRational s = (SimplifiedRational)obj;
+                if(s.Numerator==this.Numerator && s.Denominator==this.Denominator){
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         /**
@@ -92,7 +133,10 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        throw new NotImplementedException();
+	        /*if(Math.Sign(this.Numerator)==-1 && Math.Sign(this.Denominator)==-1){
+                    return "-numerator/denominator";
+            }*/
+            return $"{this.Numerator}/{this.Denominator}";
         }
     }
 }

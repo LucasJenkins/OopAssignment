@@ -7,6 +7,7 @@ namespace CsharpOopAssignment
 	    
         public int Numerator { get; protected set; }
 		public int Denominator { get; protected set; }
+        public int[] Array {get; protected set;}
 	    
 	    /**
          * Constructor for rational values of the type:
@@ -21,7 +22,13 @@ namespace CsharpOopAssignment
          */
 	    public RationalBase(int numerator, int denominator)
 	    {
-		    throw new NotImplementedException();
+		    if(denominator==0){
+                throw new ArgumentException();
+            }
+            
+            Numerator = numerator;
+            Denominator = denominator;
+                
 	    }
 
         /**
@@ -44,13 +51,13 @@ namespace CsharpOopAssignment
         /**
          * negation of rational values
          * <p>
-         * definition: `negate(n / d) = -n / d`
+         * definition: `negate(n / d) = -(n / d)`
          *
          * @return the negation of this
          */
         public RationalBase Negate()
         {
-	        throw new NotImplementedException();
+            return Construct(Numerator*(-1), Denominator);
         }
 
         /**
@@ -64,7 +71,13 @@ namespace CsharpOopAssignment
 		 */
         public RationalBase Invert()
         {
-	        throw new NotImplementedException();
+	         if(Numerator==0){
+                throw new InvalidOperationException();
+             }
+             //Negate();
+            int numerator = Denominator;
+            int denominator = Numerator;
+            return Construct(numerator, denominator);
         }
 
         /**
@@ -80,7 +93,10 @@ namespace CsharpOopAssignment
          */
         public RationalBase Add(RationalBase that)
         {
-	        throw new NotImplementedException();
+	        if(that == null){
+                throw new InvalidOperationException();
+             }
+            return this.Construct(((Numerator * that.Denominator) + (that.Numerator * Denominator)), (Denominator * that.Denominator));
         }
 
         /**
@@ -96,7 +112,11 @@ namespace CsharpOopAssignment
          */
         public RationalBase Sub(RationalBase that)
         {
-	        throw new NotImplementedException();
+	        if(that == null){
+                throw new InvalidOperationException();
+             }
+            
+            return Construct(((Numerator* that.Denominator) - (that.Numerator* Denominator)), (Denominator* that.Denominator));
         }
 
         /**
@@ -112,7 +132,12 @@ namespace CsharpOopAssignment
          */
         public RationalBase Mul(RationalBase that)
         {
-	        throw new NotImplementedException();
+	        if(that == null){
+                throw new InvalidOperationException();
+             }
+            
+            
+            return Construct((Numerator * that.Numerator), (Denominator * that.Denominator));
         }
 
         /**
@@ -128,7 +153,11 @@ namespace CsharpOopAssignment
 		 */
         public RationalBase Div(RationalBase that)
         {
-	        throw new NotImplementedException();
+	        if(that == null||that.Numerator==0){
+                throw new InvalidOperationException();
+             }
+           
+            return Construct((Numerator * that.Denominator), (Denominator * that.Numerator) );
         }
     }
 }
